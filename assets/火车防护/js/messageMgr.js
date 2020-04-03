@@ -9,6 +9,11 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        //功能：从json中获取信息，显示在Lable上
+        //mText:用于显示提示信息
+        //mContent:用于存放提示信息的json文件
+        //num:运行时局部变量，不用管
+        //运行此文件，将properity绑定即可
         mText:{
             default:null,
             type:cc.Label
@@ -36,6 +41,7 @@ cc.Class({
                 this.num=this.num+1;
             }
          },1);
+         //上一行的1是指延时1s
      },
      
 

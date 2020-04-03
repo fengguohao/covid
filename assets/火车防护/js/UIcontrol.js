@@ -9,10 +9,14 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        //功能：用节点控制另一个节点移动
+        //绑定节点即可运行
+        //控制的节点
         people:{
             default:null,
             type:cc.Node
         },
+        //受控节点
         controlBar:{
             default:null,
             type:cc.Node
@@ -28,6 +32,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
      onLoad () {
+         //下面的内容控制了节点行为
         this.speed=500;
         console.log(this.speed);
          this.controlBar.on(cc.Node.EventType.TOUCH_START,function(event){

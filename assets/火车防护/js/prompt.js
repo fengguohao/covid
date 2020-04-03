@@ -9,6 +9,9 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        //功能：promptMove():使promptBar跟随people节点移动（移动形式：弹跳移入）
+        //promptOn():使promptBar显示或消失
+        //上面两个函数都是回调函数，绑定在按钮等节点上即可看到效果
         promptBar:{
             default:null,
             type:cc.Node
@@ -29,13 +32,6 @@ cc.Class({
     },
 
     promptMove(){
-        // this.promptBar.runAction(cc.toggleVisibility());
-        // var sprites = node.getComponentsInChildren(cc.Node);
-        // for(i in sprites){
-        //     i.runAction(cc.toggleVisibility());
-        // }
-
-        // cc.tween(this,promptBar).to(1, {scale: 1, position: cc.v2(100, 100)});
         var actionBy = cc.moveTo(0.6, this.people.getPosition()).easing(cc.easeBackIn());
         this.promptBar.runAction(actionBy);
     },
