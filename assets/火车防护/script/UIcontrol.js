@@ -28,7 +28,8 @@ cc.Class({
         dirY:0,
         dirX:0,
         //控制摇杆半径
-        controlRadius:100
+        controlRadius:100,
+        gamePlayerjs:cc.Component
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -40,7 +41,7 @@ cc.Class({
         //控制摇杆半径
         this.controlRadius=100;
         //获取gamePlayerjs的控制权限
-        var gamePlayerjs=this.gamePlayer.getComponent('gamePlayer');
+        this.gamePlayerjs=this.gamePlayer.getComponent('gamePlayer');
 
          //下面的内容控制了节点行为
         //点按开始
@@ -70,19 +71,7 @@ cc.Class({
                 this.dirX=0;
              }
             
-             //将方向信息传给gamePlayer
-             if(this.dirX === -1 && this.dirY === 0) {
-                gamePlayerjs.direction = 'right';
-            } else if(this.dirX === 1 && this.dirY === 0) {
-                gamePlayerjs.direction = 'left';
-            } else if(this.dirX === 0 && this.dirY === -1) {
-                gamePlayerjs.direction = 'up';
-            } else if(this.dirX === 0 && this.dirY === 1) {
-                gamePlayerjs.direction = 'down';
-            }
-            //检测距离
-            gamePlayerjs.judgeDistance();
-            gamePlayerjs.judgeNeighbor();
+             
     
          },this);
          //点按结束，重置控制摇杆
@@ -119,10 +108,19 @@ cc.Class({
                 yplus=-1;
             }
             this.gamePlayer.setPosition(this.gamePlayer.getPosition().sub(cc.v2(this.speed*this.dirX*dt+xplus,this.speed*this.dirY*dt+yplus)));
-            // if(Math.abs(this.gamePlayer.getPosition().y)>320){
-            //     this.dirY=0;
-            // }
-            // this.gamePlayer.setPosition(this.gamePlayer.getPosition().sub(cc.v2(this.speed*this.dirX*dt,this.speed*this.dirY*dt)));
+            //将方向信息传给gamePlayer
+            if(this.dirX === -1 && this.dirY === 0) {
+                this.gamePlayerjs.direction = 'right';
+            } else if(this.dirX === 1 && this.dirY === 0) {
+                this.gamePlayerjs.direction = 'left';
+            } else if(this.dirX === 0 && this.dirY === -1) {
+                this.gamePlayerjs.direction = 'up';
+            } else if(this.dirX === 0 && this.dirY === 1) {
+                this.gamePlayerjs.direction = 'down';
+            }
+            //检测距离
+            this.gamePlayerjs.judgeDistance();
+            this.gamePlayerjs.judgeNeighbor();
         }
      },
 });
